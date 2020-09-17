@@ -111,7 +111,7 @@
             this.gameOverLabel.BackColor = System.Drawing.Color.Transparent;
             this.gameOverLabel.Font = new System.Drawing.Font("小塚ゴシック Pr6N B", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.gameOverLabel.ForeColor = System.Drawing.Color.Blue;
-            this.gameOverLabel.Location = new System.Drawing.Point(219, 167);
+            this.gameOverLabel.Location = new System.Drawing.Point(-123, 170);
             this.gameOverLabel.Name = "gameOverLabel";
             this.gameOverLabel.Size = new System.Drawing.Size(363, 117);
             this.gameOverLabel.TabIndex = 6;
@@ -135,7 +135,7 @@
             this.clearLabel.BackColor = System.Drawing.Color.Transparent;
             this.clearLabel.Font = new System.Drawing.Font("小塚ゴシック Pr6N B", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.clearLabel.ForeColor = System.Drawing.Color.Red;
-            this.clearLabel.Location = new System.Drawing.Point(264, 167);
+            this.clearLabel.Location = new System.Drawing.Point(561, 303);
             this.clearLabel.Name = "clearLabel";
             this.clearLabel.Size = new System.Drawing.Size(273, 117);
             this.clearLabel.TabIndex = 8;
@@ -162,6 +162,7 @@
             this.Controls.Add(this.titleLabel);
             this.Name = "Form1";
             this.Text = "よけとる2020";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
