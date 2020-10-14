@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace yoketoruvs20
 {
@@ -23,6 +24,8 @@ namespace yoketoruvs20
         State currentState = State.None;
         State nextState = State.Title;
 
+        [DllImport("user32.dll")]
+        public static extern short GetAsyncKeyState(int vKey);
         public Form1()
         {
             InitializeComponent();
@@ -34,42 +37,53 @@ namespace yoketoruvs20
             {
                 initProc();
             }
-        }
-
-        void initProc()
-        {
-            currentState = nextState;
-            nextState = State.None;
-
-            switch (currentState)
+            if (is Debug)
             {
-                case State.Title:
-                    titleLabel.Visible = true;
-                    startButton.Visible = true;
-                    copyrightLabel.Visible = true;
-                    hiLabel.Visible = true;
-                    gameOverLabel.Visible = false;
-                    titleButton.Visible = false;
-                    clearLabel.Visible = false;
-                    break;
-
-                case State.Game:
-                    titleLabel.Visible = false;
-                    startButton.Visible = false;
-                    copyrightLabel.Visible = false;
-                    hiLabel.Visible = false;
-                    break;
+                if (GetAsyncKeyState((int)Keys.O) < 0)
+                {
+                    nextState = State.Gameover;
+                }
+                else if (GetAsyncKeyState((int)Keys.C) < 0)
+                {
+                    nextState = State.Clear;
+                }
             }
-        }
 
-        private void startButton_Click(object sender, EventArgs e)
-        {
-            nextState = State.Game;
-        }
+            void initProc()
+            {
+                currentState = nextState;
+                nextState = State.None;
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
+                switch (currentState)
+                {
+                    case State.Title:
+                        titleLabel.Visible = true;
+                        startButton.Visible = true;
+                        copyrightLabel.Visible = true;
+                        hiLabel.Visible = true;
+                        gameOverLabel.Visible = false;
+                        titleButton.Visible = false;
+                        clearLabel.Visible = false;
+                        break;
 
+                    case State.Game:
+                        titleLabel.Visible = false;
+                        startButton.Visible = false;
+                        copyrightLabel.Visible = false;
+                        hiLabel.Visible = false;
+                        break;
+                    case State.Gameover:
+                        gameOverLabel.Visible = true;
+                        titleButton.Visible = true;
+                        break;
+                    case State.Clear:
+                        clearLabel.Visible = true;
+                        hiLabel.Visible = true;
+                        titleButton.Visible = true;
+                        break;
+                }
+            }
+            
         }
     }
 }
